@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  display: block;
+  place-items: unset;
+  min-width: unset;
+  min-height: unset;
+}
+
+.notFound {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+  img {
+    margin-top: 20px;
+    height: 600px;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  .error {
+    color: #00bc77;
+    font-size: 2em;
+    text-align: center;
+  }
+  .link {
+    color: #2c3e50;
+    font-size: 1.5em;
+    text-align: center;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
