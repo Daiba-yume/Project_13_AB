@@ -1,0 +1,19 @@
+.headerProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  margin-bottom: 2rem;
+  .edit-button {
+    border-color: #00bc77;
+    background-color: #00bc77;
+    color: #fff;
+    padding: 10px;
+    font-size: 0.8rem;
+    border-radius: unset;
+    border-right: 2px solid #008c5a;
+    border-bottom: 2px solid #008c5a;
+    width: 90px;
+    height: 40px;
+  }
+}
