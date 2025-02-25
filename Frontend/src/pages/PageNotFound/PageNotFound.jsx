@@ -10,7 +10,7 @@ const PageNotFound = () => {
         Oups ! La page que vous demandez n&apos;existe pas
       </p>
       <Link to="/" className="link">
-        Retourner sur la page d&apos;accueil
+        Revenir sur la page d&apos;accueil
       </Link>
     </section>
   );
