@@ -4,6 +4,7 @@ import Home from "./pages/Home/Home";
 import Footer from "./utils/Footer/Footer";
 import Header from "./utils/Header/Header";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import Login from "./pages/Login/Login";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer />
