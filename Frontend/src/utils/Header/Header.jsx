@@ -6,11 +6,11 @@ import "./Header.scss";
 const Header = () => {
   return (
     <nav className="header">
-      <NavLink className="headerLogo" href="./index.html">
+      <NavLink className="headerLogo" to="/">
         <img className="logo" src={Logo} alt="logo argentBank" />
       </NavLink>
       <div>
-        <NavLink className="logIn" href="./sign-in.html">
+        <NavLink className="logIn" to="/Login">
           <FaUserCircle className="signInIcon" />
           Sign In
         </NavLink>
