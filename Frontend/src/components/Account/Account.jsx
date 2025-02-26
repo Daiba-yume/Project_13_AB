@@ -6,17 +6,17 @@ const Account = () => {
       <CardAccount
         accountTitle="Checking (x8349)"
         amount="2,082.79"
-        amountDescription="Available Balance"
+        amountDetail="Available Balance"
       />
       <CardAccount
-        accountTitle="Argent Bank Savings (x6712)"
+        accountTitle="Savings (x6712)"
         amount="10,928.42"
-        amountDescription="Available Balance"
+        amountDetail="Available Balance"
       />
       <CardAccount
-        accountTitle="Argent Bank Credit Card (x8349)"
+        accountTitle="Credit Card (x8349)"
         amount="184.30"
-        amountDescription="Current Balance"
+        amountDetail="Current Balance"
       />
     </>
   );
