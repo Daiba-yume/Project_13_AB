@@ -48,15 +48,15 @@
     border-bottom: 2px solid #008c5a;
     color: #fff;
   }
-  // Pour les écrans plus petits, sous 720px, on met le bouton en bas
+  // Pour les écrans plus petits
   @media (max-width: 720px) {
-    flex-direction: column; // On passe à une disposition verticale
-    align-items: flex-start; // Aligne les éléments à gauche
+    flex-direction: column;
+    align-items: flex-start;
 
     .transaction-button {
-      width: 100%; // Le bouton prend toute la largeur sur les petits écrans
-      margin-top: 1rem; // Un peu de marge au-dessus du bouton
-      margin-bottom: 1rem; // Un peu de marge en bas
+      width: 100%;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
     }
   }
 }
