@@ -37,7 +37,6 @@
   .transaction-button {
     display: block;
     align-self: center;
-    width: 15%;
     padding: 8px;
     font-size: 1.1rem;
     font-weight: bold;
@@ -48,5 +47,16 @@
     border-right: 2px solid #008c5a;
     border-bottom: 2px solid #008c5a;
     color: #fff;
+  }
+  // Pour les écrans plus petits, sous 720px, on met le bouton en bas
+  @media (max-width: 720px) {
+    flex-direction: column; // On passe à une disposition verticale
+    align-items: flex-start; // Aligne les éléments à gauche
+
+    .transaction-button {
+      width: 100%; // Le bouton prend toute la largeur sur les petits écrans
+      margin-top: 1rem; // Un peu de marge au-dessus du bouton
+      margin-bottom: 1rem; // Un peu de marge en bas
+    }
   }
 }
