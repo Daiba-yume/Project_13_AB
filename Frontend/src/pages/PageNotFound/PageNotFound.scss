@@ -9,13 +9,11 @@ body {
 .notFound {
   display: flex;
   flex-direction: column;
-  gap: 30px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   img {
-    margin-top: 20px;
-    height: 600px;
+    height: 550px;
     object-fit: contain;
     border-radius: 5px;
   }

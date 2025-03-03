@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./PageNotFound.scss";
-import notFoundImg from "../../assets/404.webp";
+import notFoundImg from "../../assets/404.png";
 
 const PageNotFound = () => {
   return (
