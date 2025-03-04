@@ -1,11 +1,9 @@
 import axios from "axios";
-import { loginRequest, loginSuccess, loginFailure } from "../Slices/authSlices";
+import { loginSuccess } from "../Slices/authSlices";
 
 // Fonction pour connecter l'user
 export const loginUser = (email, password) => async (dispatch) => {
   try {
-    // Déclenche l'action pour signaler le début du processus de connexion
-    dispatch(loginRequest());
     // Envoie la req de connexion avec l'email et le mdp
     const response = await axios.post(
       "http://localhost:3001/api/v1/user/login",
@@ -36,8 +34,6 @@ export const loginUser = (email, password) => async (dispatch) => {
   } catch (error) {
     //En cas d'erreur
     console.error("Error details: ", error.response);
-    dispatch(
-      loginFailure(error.response?.data?.message || "Erreur de connexion")
-    );
+    console.log(error.response?.data?.message || "Erreur de connexion");
   }
 };
