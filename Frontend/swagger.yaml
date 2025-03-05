@@ -9,8 +9,10 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /transactions:
+  /user/transactions:
     get:
+      security:
+        - Bearer: []
       tags:
         - Transactions Module
       summary: Retrieve all transactions for the current month
@@ -32,6 +34,8 @@ paths:
           description: Internal Server Error
   /user/transaction:
     post:
+      security:
+        - Bearer: []
       tags:
         - Transactions Module
       summary: Create a new transaction
@@ -145,7 +149,6 @@ paths:
         "500":
           description: Internal Server Error
 
-  # SECURITY TO DO
 securityDefinitions:
   Bearer:
     type: apiKey
