@@ -2,7 +2,7 @@ import axios from "axios";
 import { loginSuccess } from "../Slices/authSlices";
 
 // Fonction pour connecter l'user
-export const loginUser = (email, password) => async (dispatch) => {
+export const loginUser = (email, password, rememberMe) => async (dispatch) => {
   try {
     // Envoie la req de connexion avec l'email et le mdp
     const response = await axios.post(
@@ -14,7 +14,12 @@ export const loginUser = (email, password) => async (dispatch) => {
     );
     // On récupère le token de la resp et on le stocke dans le localStorage
     const token = response.data.body.token;
-    localStorage.setItem("token", token);
+
+    if (rememberMe) {
+      localStorage.setItem("token", token);
+    } else {
+      sessionStorage.setItem("token", token);
+    }
 
     // Envoie une req pour récup les data de profil de l'user
     const profileResponse = await axios.post(

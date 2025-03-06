@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 const Login = () => {
   const [email, setEmail] = useState(""); // État pour l'email
   const [password, setPassword] = useState(""); // État pour le mdp
+  const [rememberMe, setRememberMe] = useState(false);
 
   const dispatch = useDispatch(); // Accès à la fonction dispatch
   const { loading, error, userInfos } = useSelector((state) => state.auth); // Accès au state Redux
@@ -25,7 +26,7 @@ const Login = () => {
   // Fonction pour gérer la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(loginUser(email, password)); // Envoie la requête de connexion
+    dispatch(loginUser(email, password, rememberMe)); // Envoie la requête de connexion
   };
   return (
     <main className="main bg-dark">
@@ -54,7 +55,12 @@ const Login = () => {
             />
           </div>
           <div className="inputRemember">
-            <input type="checkbox" id="remember-me" />
+            <input
+              type="checkbox"
+              id="remember-me"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button type="submit" className="signInButton" disabled={loading}>
