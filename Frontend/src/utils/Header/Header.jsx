@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
 import Logo from "../../assets/argentBankLogo.png";
 import { FaUserCircle } from "react-icons/fa";
+import { FaRightFromBracket } from "react-icons/fa6";
 import "./Header.scss";
 
 const Header = () => {
@@ -13,6 +14,13 @@ const Header = () => {
         <NavLink className="logIn" to="/Login">
           <FaUserCircle className="signInIcon" />
           Sign In
+        </NavLink>
+      </div>
+      {/* logout à faire */}
+      <div className="logout">
+        <NavLink className="signOut">
+          <FaRightFromBracket />
+          Sign Out
         </NavLink>
       </div>
     </nav>
