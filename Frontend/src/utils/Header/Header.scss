@@ -1,3 +1,5 @@
+$mainColor: #2c3e50;
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -12,7 +14,7 @@
   .logIn {
     display: flex;
     font-weight: bold;
-    color: #2c3e50;
+    color: $mainColor;
     text-decoration: none;
     align-items: center;
     .signInIcon {
@@ -21,6 +23,38 @@
     }
     &:hover {
       text-decoration: underline;
+    }
+  }
+  .logOut {
+    display: flex;
+    gap: 15px;
+    font-weight: bold;
+    align-items: center;
+
+    .signOutIcon {
+      color: $mainColor;
+      font-size: 1.2rem;
+      margin-right: 0.2rem;
+    }
+    .userInfo {
+      display: flex;
+      align-items: center;
+      color: $mainColor;
+      text-decoration: none;
+      font-weight: bold;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .signOut {
+      color: $mainColor;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: bold;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
