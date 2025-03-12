@@ -18,8 +18,7 @@ const ProfileHeader = () => {
       <h1>
         Welcome back
         <br />
-        {/* Affiche le prénom et le nom si disponibles, sinon affiche 'Unknown' */}
-        {firstName && lastName ? `${firstName} ${lastName}` : "Unknown"} !
+        {!isEditing ? `${firstName} ${lastName} !` : ""}
       </h1>
       {!isEditing ? (
         <button className="edit-button" onClick={handleEditClick}>
