@@ -1,0 +1,40 @@
+.editInput {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.editButton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  input {
+    padding: 8px;
+    border: 2px solid #c3cfd9;
+    border-radius: 4px;
+    height: 25px;
+    font-weight: bold;
+    color: #c3cfd9;
+  }
+  .save,
+  .cancel {
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 50%;
+    justify-content: space-around;
+    border: 1px solid #00bc77;
+  }
+
+  .save {
+    background-color: white;
+    color: #00bc77;
+    transform: translateX(98px);
+  }
+
+  .cancel {
+    background-color: white;
+    color: #00bc77;
+  }
+}
