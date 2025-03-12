@@ -1,13 +1,22 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import Logo from "../../assets/argentBankLogo.png";
 import { FaUserCircle } from "react-icons/fa";
 import { FaRightFromBracket } from "react-icons/fa6";
 import "./Header.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../Redux/Slices/authSlices";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const token = useSelector((state) => state.auth.token);
   const firstName = useSelector((state) => state.auth.userInfos?.firstName);
+
+  const handleLogout = () => {
+    dispatch(logout()); // déco via redux
+    navigate("/login");
+  };
   return (
     <nav className="header">
       <NavLink className="headerLogo" to="/">
@@ -25,7 +34,7 @@ const Header = () => {
             <FaUserCircle className="signOutIcon" />
             {firstName}
           </NavLink>
-          <NavLink className="signOut" to="/login">
+          <NavLink className="signOut" onClick={handleLogout}>
             <FaRightFromBracket />
             Sign Out
           </NavLink>
