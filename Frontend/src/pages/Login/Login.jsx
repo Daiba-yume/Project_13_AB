@@ -2,7 +2,7 @@ import "./Login.scss";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { loginUser } from "../../Redux/Actions/authActions";
+import { loginUser } from "../../Redux/Actions/authPost";
 import { useNavigate } from "react-router";
 
 const Login = () => {

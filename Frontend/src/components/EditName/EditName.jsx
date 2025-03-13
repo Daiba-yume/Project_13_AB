@@ -26,7 +26,7 @@ const EditName = ({ currentFirstName, currentLastName, setIsEditing }) => {
             type="text"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            placeholder="first Name"
+            placeholder="First Name"
           />
           <button className="save" type="submit">
             Save
@@ -37,7 +37,7 @@ const EditName = ({ currentFirstName, currentLastName, setIsEditing }) => {
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            placeholder="last Name"
+            placeholder="Last Name"
           />
           <button className="cancel" type="button" onClick={handleCancel}>
             Cancel

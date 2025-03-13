@@ -16,6 +16,9 @@
     height: 25px;
     font-weight: bold;
     color: #c3cfd9;
+    &::placeholder {
+      color: #c3cfd9;
+    }
   }
   .save,
   .cancel {
