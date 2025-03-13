@@ -155,6 +155,7 @@ paths:
           description: Transaction not found
         "500":
           description: Internal Server Error
+    # Route pour modifier la categorie et les notes d'une transaction
     patch:
       security:
         - Bearer: []
@@ -208,6 +209,20 @@ definitions:
         type: array
         items:
           $ref: "#/definitions/Transaction"
+  Account:
+    type:: object
+    properties:
+      id:
+        type: string
+      userId:
+        type: string
+      balance:
+        type: number
+        format: float
+      transactions:
+        type: array
+        items:
+          $ref: "#/definitions/Transaction"
   Transaction:
     type: object
     properties:
@@ -215,6 +230,7 @@ definitions:
         type: string
       amount:
         type: number
+        format: float
       date:
         type: string
         format: date
@@ -222,6 +238,13 @@ definitions:
         type: string
       description:
         type: string
+      category:
+        type: string
+      notes:
+        type: string
+      balance:
+        type: string
+        format: float
   ModifyTransaction:
     type: object
     properties:
