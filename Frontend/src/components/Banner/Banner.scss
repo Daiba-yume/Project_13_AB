@@ -1,48 +1,44 @@
 .Banner {
   background-image: url("../../assets/bank-tree.jpeg");
-  background-position: center 35%;
+  background-position: center 20%;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 390px;
+  height: 300px;
   position: relative;
   @media (min-width: 920px) {
-    .Banner {
-      height: 400px;
-      background-position: 0% 33%;
+    height: 400px;
+    background-position: 0% 33%;
+  }
+
+  .bannerSection {
+    width: 300px;
+    background: white;
+    padding: 1.5rem;
+    position: absolute;
+    right: 5%;
+    top: 20%;
+    @media screen and (max-width: 920px) {
+      position: relative;
+      top: 2rem;
+      right: 0;
+      margin: 0 auto;
+      width: 250px;
     }
-    .bannerSection {
-      width: 300px;
-      background: white;
-      padding: 1.5rem;
-      position: absolute;
-      right: 5%;
-      top: 20%;
-      @media (min-width: 920px) {
-        .Banner {
-          height: 400px;
-          background-position: 0% 33%;
-        }
-        .subtitle {
-          font-weight: bold;
-          font-size: 1.5rem;
-          margin: 0;
-          @media (min-width: 920px) {
-            .Banner {
-              height: 400px;
-              background-position: 0% 33%;
-            }
-          }
-        }
-        .text {
-          margin-bottom: 0;
-          font-size: 1.2rem;
-          @media (min-width: 920px) {
-            .Banner {
-              height: 400px;
-              background-position: 0% 33%;
-            }
-          }
-        }
+
+    .subtitle {
+      font-weight: bold;
+      font-size: 1.5rem;
+      margin: 0;
+      @media screen and (max-width: 920px) {
+        font-size: 1rem;
+      }
+    }
+
+    .text {
+      margin-bottom: 0;
+      font-size: 1.2rem;
+      @media screen and (max-width: 920px) {
+        font-size: 1rem;
       }
     }
   }
