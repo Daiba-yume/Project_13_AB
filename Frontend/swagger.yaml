@@ -10,7 +10,7 @@ schemes:
   - http
 paths:
   # Route pour récupérer tous les comptes d'un utilisateur
-  /user/accounts:
+  /accounts:
     get:
       security:
         - Bearer: []
@@ -18,13 +18,19 @@ paths:
         - Account Module
       summary: Retrieve all user accounts with transactions
       description: Fetches all accounts and their transactions for the current user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
       produces:
         - application/json
       responses:
         "200":
           description: Successfully retrieved transaction list
           schema:
-            $ref: "#/definitions/TransactionsResponse"
+            $ref: "#/definitions/Account"
         "400":
           description: Invalid request
         "401":
@@ -34,7 +40,7 @@ paths:
         "500":
           description: Internal Server Error
   # Route pour récupérer un compte
-  /user/accounts/{idAccount}:
+  /accounts/{idAccount}:
     get:
       security:
         - Bearer: []
@@ -59,7 +65,7 @@ paths:
         "200":
           description: Successfully retrieved transaction
           schema:
-            $ref: "#/definitions/TransactionsResponse"
+            $ref: "#/definitions/Account"
         "400":
           description: Invalid request
         "401":
@@ -69,7 +75,7 @@ paths:
         "500":
           description: Internal Server Error
   #  Route pour récupérer des transactions sur les 3 derniers mois
-  /transactions/{account}/{idTransaction}/{startDate}/{endDate}:
+  /transactions/{account}:
     get:
       security:
         - Bearer: []
@@ -78,28 +84,16 @@ paths:
       summary: Retrieve all transactions for the last 3 months
       description: Fetch all transactions for the last 3 months, grouped by account
       parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
         - in: path
           name: account
           description: Account ID
           required: true
           type: string
-        - in: path
-          name: idTransaction
-          description: Transaction ID
-          required: true
-          type: string
-        - in: path
-          name: startDate
-          description: Start date for filtering transactions (3 months ago)
-          required: true
-          type: string
-          format: date
-        - in: path
-          name: endDate
-          description: End date for filtering transactions (today)
-          required: true
-          type: string
-          format: date
       produces:
         - application/json
       responses:
@@ -116,7 +110,7 @@ paths:
         "500":
           description: Internal Server Error
   # Route pour récupérer une transaction spécifique
-  /transactions/{account}/{idTransaction}:
+  /transactions/{idTransaction}:
     get:
       security:
         - Bearer: []
@@ -128,11 +122,6 @@ paths:
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
-          required: true
-          type: string
-        - in: path
-          name: account
-          description: Account ID
           required: true
           type: string
         - in: path
@@ -202,27 +191,18 @@ securityDefinitions:
     name: Authorization
     in: header
 definitions:
-  TransactionsResponse:
-    type: object
-    properties:
-      transactions:
-        type: array
-        items:
-          $ref: "#/definitions/Transaction"
   Account:
-    type:: object
+    type: object
     properties:
       id:
         type: string
-      userId:
+      title:
         type: string
-      balance:
+      amount:
         type: number
         format: float
-      transactions:
-        type: array
-        items:
-          $ref: "#/definitions/Transaction"
+      description:
+        type: string
   Transaction:
     type: object
     properties:
