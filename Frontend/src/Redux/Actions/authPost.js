@@ -12,30 +12,37 @@ export const loginUser = (email, password, rememberMe) => async (dispatch) => {
         password,
       }
     );
-    // On récupère le token de la resp et on le stocke dans le localStorage
-    const token = response.data.body.token;
 
-    if (rememberMe) {
-      localStorage.setItem("token", token);
-    } else {
-      sessionStorage.setItem("token", token);
-    }
+    if (response.status === 200) {
+      // On récupère le token de la resp et on le stocke dans le localStorage
+      const token = response.data.body.token;
 
-    // Envoie une req pour récup les data de profil de l'user
-    const profileResponse = await axios.post(
-      "http://localhost:3001/api/v1/user/profile",
-      {},
-      {
-        headers: { Authorization: `Bearer ${token}` }, // add le token dans l'en-tête
+      if (rememberMe) {
+        localStorage.setItem("token", token);
+        console.log("Token enregistére dans le localStorage");
+      } else {
+        sessionStorage.setItem("token", token);
+        console.log("Token enregistére dans le sessionStorage");
       }
-    );
-    // Si la récupération est réussi, on met à jour le store
-    dispatch(
-      loginSuccess({
-        user: profileResponse.data.body,
-        token,
-      })
-    );
+
+      // Envoie une req pour récup les data de profil de l'user
+      const profileResponse = await axios.post(
+        "http://localhost:3001/api/v1/user/profile",
+        {},
+        {
+          headers: { Authorization: `Bearer ${token}` }, // add le token dans l'en-tête
+        }
+      );
+      console.log("Profil récupéré avec succés");
+
+      // Si la récupération est réussi, on met à jour le store
+      dispatch(
+        loginSuccess({
+          user: profileResponse.data.body,
+          token,
+        })
+      );
+    }
   } catch (error) {
     //En cas d'erreur
     console.error("Error details: ", error.response);

@@ -2,9 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // État initial
 const initialState = {
-  token: null, // token d'auth
+  token:
+    localStorage.getItem("authToken") ||
+    sessionStorage.getItem("authToken") ||
+    null, // token d'auth
   userInfos: null, // infos sur l'utilisateur
 };
+// Vérifiez ce que vous obtenez ici
+console.log("Token au chargement de l'application:", initialState.token);
 
 // Slice de l'auth
 const authSlice = createSlice({
@@ -15,6 +20,9 @@ const authSlice = createSlice({
     loginSuccess(state, action) {
       state.token = action.payload.token;
       state.userInfos = action.payload.user;
+      console.log("Token enregistré:", action.payload.token);
+      localStorage.setItem("authToken", action.payload.token);
+      sessionStorage.setItem("authToken", action.payload.token);
     },
     updateUserSuccess(state, action) {
       state.userInfos = action.payload;
@@ -22,6 +30,8 @@ const authSlice = createSlice({
     logout(state) {
       state.token = null;
       state.userInfos = null;
+      localStorage.removeItem("authToken");
+      sessionStorage.removeItem("authToken");
     },
   },
 });
