@@ -5,7 +5,6 @@ import { FaRightFromBracket } from "react-icons/fa6";
 import "./Header.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../Redux/Slices/authSlices";
-import { useEffect } from "react";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -13,12 +12,6 @@ const Header = () => {
 
   const token = useSelector((state) => state.auth.token);
   const firstName = useSelector((state) => state.auth.userInfos?.firstName);
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }
-  }, [token, navigate]);
 
   const handleLogout = () => {
     sessionStorage.removeItem("token");
