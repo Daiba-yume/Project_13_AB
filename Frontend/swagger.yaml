@@ -16,8 +16,8 @@ paths:
         - Bearer: []
       tags:
         - Account Module
-      summary: Retrieve all user accounts with transactions
-      description: Fetches all accounts and their transactions for the current user
+      summary: Retrieve all user accounts
+      description: Fetches all accounts
       parameters:
         - in: header
           name: Authorization
@@ -47,7 +47,7 @@ paths:
       tags:
         - Account Module
       summary: Retrieve a user account by its ID
-      description: Fetches a specific user account by its unique ID and returns associated transaction data.
+      description: Fetches a specific user account by its unique ID.
       parameters:
         - in: header
           name: Authorization
@@ -100,7 +100,9 @@ paths:
         "200":
           description: Successfully retrieved transactions for the last 3 months
           schema:
-            $ref: "#/definitions/Transaction"
+            type: array
+            items:
+              $ref: "#/definitions/Transaction"
         "400":
           description: Invalid Fields
         "401":
@@ -110,7 +112,7 @@ paths:
         "500":
           description: Internal Server Error
   # Route pour récupérer une transaction spécifique
-  /transactions/{idTransaction}:
+  /transactions/transaction/{idTransaction}:
     get:
       security:
         - Bearer: []
@@ -135,7 +137,9 @@ paths:
         "200":
           description: Transaction retrieved successfully
           schema:
-            $ref: "#/definitions/Transaction"
+            type: array
+            items:
+              $ref: "#/definitions/Transaction"
         "400":
           description: Invalid Fields
         "401":
