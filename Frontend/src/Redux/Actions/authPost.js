@@ -1,48 +1,31 @@
-import axios from "axios";
+import { loginRequest, userProfile } from "./authService";
 import { loginSuccess } from "../Slices/authSlices";
 
 // Fonction pour connecter l'user
 export const loginUser = (email, password, rememberMe) => async (dispatch) => {
   try {
-    // Envoie la req de connexion avec l'email et le mdp
-    const response = await axios.post(
-      "http://localhost:3001/api/v1/user/login",
-      {
-        email,
-        password,
-      }
-    );
-
-    if (response.status === 200) {
-      // On récupère le token de la resp et on le stocke dans le localStorage
-      const token = response.data.body.token;
-
-      if (rememberMe) {
-        localStorage.setItem("token", token);
-        console.log("Token enregistére dans le localStorage");
-      } else {
-        sessionStorage.setItem("token", token);
-        console.log("Token enregistére dans le sessionStorage");
-      }
-
-      // Envoie une req pour récup les data de profil de l'user
-      const profileResponse = await axios.post(
-        "http://localhost:3001/api/v1/user/profile",
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` }, // add le token dans l'en-tête
-        }
-      );
-      console.log("Profil récupéré avec succés");
-
-      // Si la récupération est réussi, on met à jour le store
-      dispatch(
-        loginSuccess({
-          user: profileResponse.data.body,
-          token,
-        })
-      );
+    // Requête de connexion pour obtenir le token
+    const token = await loginRequest(email, password);
+    // Save le token dans le storage (localStorage ou sessionStorage) en fonction de l'option "rememberMe"
+    if (rememberMe) {
+      localStorage.setItem("token", token);
+      console.log("Token enregistére dans le localStorage");
+    } else {
+      sessionStorage.setItem("token", token);
+      console.log("Token enregistére dans le sessionStorage");
     }
+
+    // On utilise le token pour récupérer le profil de l'utilisateur
+    const profileResponse = await userProfile(token);
+    console.log("Profil récupéré avec succés");
+
+    // Si la récupération est réussi, on met à jour le store avec les infos
+    dispatch(
+      loginSuccess({
+        user: profileResponse,
+        token,
+      })
+    );
   } catch (error) {
     //En cas d'erreur
     console.error("Error details: ", error.response);
