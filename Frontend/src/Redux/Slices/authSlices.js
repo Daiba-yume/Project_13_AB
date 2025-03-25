@@ -8,8 +8,6 @@ const initialState = {
     null, // token d'auth
   userInfos: null, // infos sur l'utilisateur
 };
-// Vérifiez ce que vous obtenez ici
-console.log("Token au chargement de l'application:", initialState.token);
 
 // Slice de l'auth
 const authSlice = createSlice({

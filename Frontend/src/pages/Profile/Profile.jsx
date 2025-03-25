@@ -10,24 +10,26 @@ import { loginSuccess } from "../../Redux/Slices/authSlices";
 const Profile = () => {
   const dispatch = useDispatch();
   const { userInfos } = useSelector((state) => state.auth);
-  // if (!userInfos(sessionStorage.token || localStorage.token)) {
-  //   return;
-  // }
-
+  // Récupération du token (session or local)
   const storedToken =
     sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
 
   useEffect(() => {
+    // On charge les données user
     const loadUserProfile = async () => {
+      // Si l'utilisateur n'a pas encore d'infos et qu'un token est présent
       if (!userInfos && storedToken) {
         try {
+          // Récupére les données utilisateur avec le token
           const profileData = await userProfile(storedToken);
+          // On save les données user et du token dans Redux
           dispatch(loginSuccess({ user: profileData, token: storedToken }));
         } catch (error) {
           console.error("Erreur lord du chargement du profil", error);
         }
       }
     };
+    // Appel de la fonction pour charger les données
     loadUserProfile();
   }, [userInfos, storedToken, dispatch]);
 
