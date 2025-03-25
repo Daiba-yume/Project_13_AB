@@ -1,4 +1,4 @@
-import { loginRequest, userProfile } from "./authService";
+import { loginRequest, userProfile } from "../Services/authService";
 import { loginSuccess } from "../Slices/authSlices";
 
 // Fonction pour connecter l'user
