@@ -24,7 +24,11 @@
       text-align: left;
       margin-bottom: 1rem;
     }
-
+    .error {
+      color: red;
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
     .inputWrapper label {
       font-weight: bold;
     }

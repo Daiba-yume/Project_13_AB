@@ -4,7 +4,7 @@ import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
 import "./Profile.scss";
 import { Navigate } from "react-router";
 import { useEffect } from "react";
-import { userProfile } from "../../Redux/Services/authService";
+import { userProfile } from "../../Redux/Actions/authPost";
 import { loginSuccess } from "../../Redux/Slices/authSlices";
 
 const Profile = () => {

@@ -2,14 +2,14 @@ import "./Login.scss";
 import { FaUserCircle } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { loginUser } from "../../Redux/Actions/authPost";
+import { loginUser } from "../../Redux/Services/authService";
 import { useNavigate } from "react-router";
 
 const Login = () => {
   const [email, setEmail] = useState(""); // État pour l'email
   const [password, setPassword] = useState(""); // État pour le mdp
   const [rememberMe, setRememberMe] = useState(false);
-
+  const [loginError, setLoginError] = useState("");
   const dispatch = useDispatch(); // Accès à la fonction dispatch
   const { loading, error, userInfos } = useSelector((state) => state.auth); // Accès au state Redux
 
@@ -21,11 +21,15 @@ const Login = () => {
     if (userInfos) {
       navigate("/profile");
     }
-  }, [userInfos, navigate]); // Déclencher la redirection uniquement lorsque userInfos change
+    if (error) {
+      setLoginError("L'email ou le mot de passe est incorrect");
+    }
+  }, [userInfos, navigate, error]); // Déclencher la redirection uniquement lorsque userInfos change
 
   // Fonction pour gérer la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoginError("");
     dispatch(loginUser(email, password, rememberMe)); // Envoie la requête de connexion
   };
   return (
@@ -35,25 +39,28 @@ const Login = () => {
         <h1>Sign In</h1>
         <form onSubmit={handleSubmit}>
           <div className="inputWrapper">
-            <label htmlFor="username">Username</label>
+            <label className="username">Username</label>
             <input
               type="text"
               id="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)} // Maj de l'email
               autoComplete="username"
+              required
             />
           </div>
           <div className="inputWrapper">
-            <label htmlFor="password">Password</label>
+            <label className="password">Password</label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)} // Maj du mdp
               autoComplete="current-password"
+              required
             />
           </div>
+          {loginError && <p className="error">{loginError} </p>}
           <div className="inputRemember">
             <input
               type="checkbox"
@@ -61,12 +68,11 @@ const Login = () => {
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
             />
-            <label htmlFor="remember-me">Remember me</label>
+            <label className="remember-me">Remember me</label>
           </div>
           <button type="submit" className="signInButton" disabled={loading}>
             {loading ? "Connexion..." : "Sign In"}
           </button>
-          {error && <p style={{ color: "red" }}>{error}</p>}
         </form>
       </section>
     </main>

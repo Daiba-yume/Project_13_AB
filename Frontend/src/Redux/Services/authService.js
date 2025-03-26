@@ -1,20 +1,37 @@
-import axios from "axios";
-// Fonction pour effectuer la requête de connexion et obtenir le token
-export const loginRequest = async (email, password) => {
-  const response = await axios.post("http://localhost:3001/api/v1/user/login", {
-    email,
-    password,
-  });
-  return response.data.body.token; // Retourne le token d'authentification
-};
-// Fonction pour récupérer les informations du profil utilisateur
-export const userProfile = async (token) => {
-  const response = await axios.post(
-    "http://localhost:3001/api/v1/user/profile",
-    {},
-    {
-      headers: { Authorization: `Bearer ${token}` }, // Envoie le token dans les headers pour l'authentification
+import { loginRequest, userProfile } from "../Actions/authPost";
+import { loginFailure, loginSuccess } from "../Slices/authSlices";
+
+// Fonction pour connecter l'user
+export const loginUser = (email, password, rememberMe) => async (dispatch) => {
+  try {
+    // Requête de connexion pour obtenir le token
+    const token = await loginRequest(email, password);
+    // Save le token dans le storage (localStorage ou sessionStorage) en fonction de l'option "rememberMe"
+    if (rememberMe) {
+      localStorage.setItem("token", token);
+      console.log("Token enregistére dans le localStorage");
+    } else {
+      sessionStorage.setItem("token", token);
+      console.log("Token enregistére dans le sessionStorage");
     }
-  );
-  return response.data.body; // Retourne les informations du profil utilisateur
+
+    // On utilise le token pour récupérer le profil de l'utilisateur
+    const profileResponse = await userProfile(token);
+    console.log("Profil récupéré avec succés");
+
+    // Si la récupération est réussi, on met à jour le store avec les infos
+    dispatch(
+      loginSuccess({
+        user: profileResponse,
+        token,
+      })
+    );
+  } catch (error) {
+    //En cas d'erreur
+    console.error("Error details: ", error.response);
+    console.log(error.response?.data?.message || "Erreur de connexion");
+    const errorMessage =
+      error.response?.data?.message || "Identifiants incorrects";
+    dispatch(loginFailure(errorMessage));
+  }
 };
