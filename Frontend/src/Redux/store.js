@@ -4,7 +4,7 @@ import authReducer from "./Slices/authSlices";
 // Configuration du store Redux avec le reducer
 const store = configureStore({
   reducer: {
-    auth: authReducer,
+    auth: authReducer, // Ajout du reducer pour gérer l'état d'authentification
   },
 });
 

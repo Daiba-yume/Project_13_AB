@@ -11,10 +11,10 @@ import { userProfile } from "../../Redux/Actions/authPost";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  // Récupération du token et infos user depuis Redux
   const token = useSelector((state) => state.auth.token);
   const userInfos = useSelector((state) => state.auth.userInfos?.firstName);
-  // Récupération du token (session or local)
+  // Récupération du token ( si stocké dans session or local)
   const storedToken =
     sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
 
@@ -36,10 +36,12 @@ const Header = () => {
     // Appel de la fonction pour charger les données
     loadUserProfile();
   }, [userInfos, storedToken, dispatch]);
+  // Fonction de déconnexion
   const handleLogout = () => {
     sessionStorage.removeItem("authToken");
     localStorage.removeItem("authToken");
-    dispatch(logout()); // déco via redux
+    // Déclenche l'action Redux pour supprimer les infos utilisateur
+    dispatch(logout());
     navigate("/login");
     console.log("Vous avez été déconnecté avec succès !");
   };
