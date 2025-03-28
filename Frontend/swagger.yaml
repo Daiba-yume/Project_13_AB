@@ -39,7 +39,7 @@ paths:
           description: Accounts not found
         "500":
           description: Internal Server Error
-  # Route pour récupérer un compte
+  # Route pour récupérer un compte spécifique
   /accounts/{idAccount}:
     get:
       security:
@@ -74,15 +74,15 @@ paths:
           description: Accounts not found
         "500":
           description: Internal Server Error
-  #  Route pour récupérer des transactions sur les 3 derniers mois
+  #  Route pour récupérer des transactions pour le mois en cours
   /transactions/{account}:
     get:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Retrieve all transactions for the last 3 months
-      description: Fetch all transactions for the last 3 months, grouped by account
+      summary: Retrieve all transactions for the current month
+      description: Fetch all transactions for the current month, grouped by account
       parameters:
         - in: header
           name: Authorization
@@ -98,7 +98,7 @@ paths:
         - application/json
       responses:
         "200":
-          description: Successfully retrieved transactions for the last 3 months
+          description: Successfully retrieved transactions for the current month
           schema:
             type: array
             items:
