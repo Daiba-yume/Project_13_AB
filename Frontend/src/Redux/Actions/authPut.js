@@ -1,6 +1,8 @@
 import axios from "axios";
 import { updateUserSuccess } from "../Slices/authSlices";
 
+// URL du backend Render
+const API_BASE_URL = "https://project-13-ab.onrender.com";
 // Fonction pour mettre à jour le prénom et le nom de l'user
 export const updateUserName = (firstName, lastName) => async (dispatch) => {
   try {
@@ -15,7 +17,7 @@ export const updateUserName = (firstName, lastName) => async (dispatch) => {
     }
     // Envoi de la requête PUT pour mettre à jour les infos user
     const response = await axios.put(
-      "http://localhost:3001/api/v1/user/profile",
+      `${API_BASE_URL}/api/v1/user/profile`,
       {
         firstName,
         lastName,
