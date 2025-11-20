@@ -3,9 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // État initial
 const initialState = {
   token:
-    localStorage.getItem("authToken") ||
-    sessionStorage.getItem("authToken") ||
-    null, // token d'auth
+    localStorage.getItem("token") || sessionStorage.getItem("token") || null, // token d'auth
   userInfos: null, // stock les infos sur l'utilisateur
   error: null, // erreurs d'authentification
 };
@@ -20,8 +18,8 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.userInfos = action.payload.user;
       state.error = null;
-      localStorage.setItem("authToken", action.payload.token);
-      sessionStorage.setItem("authToken", action.payload.token);
+      localStorage.setItem("token", action.payload.token);
+      sessionStorage.setItem("token", action.payload.token);
     },
     // Action pour l'update profile
     updateUserSuccess(state, action) {
@@ -32,8 +30,8 @@ const authSlice = createSlice({
       state.token = null;
       state.userInfos = null;
       state.error = null;
-      localStorage.removeItem("authToken");
-      sessionStorage.removeItem("authToken");
+      localStorage.removeItem("token");
+      sessionStorage.removeItem("token");
     },
     // Action en cas d'échec de connexion
     loginFailure(state, action) {

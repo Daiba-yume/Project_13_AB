@@ -16,7 +16,7 @@ const Header = () => {
   const userInfos = useSelector((state) => state.auth.userInfos?.firstName);
   // Récupération du token ( si stocké dans session or local)
   const storedToken =
-    sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
+    sessionStorage.getItem("token") || localStorage.getItem("token");
 
   useEffect(() => {
     // On charge les données user
@@ -38,8 +38,8 @@ const Header = () => {
   }, [userInfos, storedToken, dispatch]);
   // Fonction de déconnexion
   const handleLogout = () => {
-    sessionStorage.removeItem("authToken");
-    localStorage.removeItem("authToken");
+    sessionStorage.removeItem("token");
+    localStorage.removeItem("token");
     // Déclenche l'action Redux pour supprimer les infos utilisateur
     dispatch(logout());
     navigate("/login");

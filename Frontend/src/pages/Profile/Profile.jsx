@@ -9,7 +9,7 @@ const Profile = () => {
   const { userInfos } = useSelector((state) => state.auth);
   // Récupération du token (si stocké dans session or local)
   const storedToken =
-    sessionStorage.getItem("authToken") || localStorage.getItem("authToken");
+    sessionStorage.getItem("token") || localStorage.getItem("token");
 
   if (!userInfos && !storedToken) {
     return <Navigate to="/login" />; // Redirection vers la page de login si l'user n'est pas authentifié(pas de token pas d'infos)
